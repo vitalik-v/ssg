@@ -2,10 +2,20 @@
 
 docker-compose up --build -d
 
+
 #Перейти в src
 
 cd src
 
-#Запустить миграции
+composer i
+
+npm install
+
+npm run dev
+
+cp .env.example .env
+
+#Запуск миграций 
 
 php artisan migrate
+
