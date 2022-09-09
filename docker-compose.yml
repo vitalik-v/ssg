@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    image: app
+    container_name: app
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ./src/:/var/www
+    networks:
+      - net
+
+  postgres:
+    image: postgres:13
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ssg
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pass
+    networks:
+      - net
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - 8000:80
+      - 8443:443
+    volumes:
+      - ./src/:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge
+
