@@ -19,3 +19,7 @@ cp .env.example .env
 
 php artisan migrate
 
+#Запуск наполнения базы
+
+php artisan db:seed 
+
