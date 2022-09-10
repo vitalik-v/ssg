@@ -16,6 +16,7 @@ class CreateOffices extends Migration
         Schema::create('offices', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('code');
             $table->integer('rating')->default(0);
             $table->text('logo')->nullable();
             $table->foreignId('user_id')->nullable()->constrained();

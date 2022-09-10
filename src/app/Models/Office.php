@@ -16,6 +16,7 @@ class Office extends Model
      */
     protected $fillable = [
         'name',
+        'code',
         'rating',
         'logo'
     ];
