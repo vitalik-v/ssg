@@ -21,5 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group([], static function (): void {
     Route::get('events', [EventController::class, 'list'])
-        ->name('api.events');
+        ->name('api.event.list');
+    Route::get('events/{slug}', [EventController::class, 'show'])
+        ->name('api.event.show');
 });
