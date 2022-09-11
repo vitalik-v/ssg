@@ -6,6 +6,8 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -32,6 +34,7 @@ class Event extends Model
         'title',
         'slug',
         'body',
+        'user',
         'like',
         'office_id',
         'topic_id',
@@ -47,13 +50,23 @@ class Event extends Model
         return $this->belongsTo(Office::class);
     }
 
-//    public function status(): BelongsTo
-//    {
-//        return $this->belongsTo();
-//    }
+    public function status(): hasOne
+    {
+        return $this->hasOne(EventStatuses::class);
+    }
 
     public function topic(): BelongsTo
     {
         return $this->belongsTo(Topic::class);
+    }
+
+    public function points(): HasMany
+    {
+        return $this->hasMany(Point::class);
+    }
+
+    public function pictures(): HasMany
+    {
+        return $this->hasMany(Picture::class);
     }
 }

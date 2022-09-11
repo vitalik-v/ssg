@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Events\EventController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [MainController::class, 'list']) ->name('main');
+
+Route::prefix('events')->group(function () {
+    Route::get('/', [EventController::class, 'list']) ->name('event.list');
+    Route::get('/add', [EventController::class, 'add']) ->name('event.add');
+    Route::post('/add', [EventController::class, 'addEvent']) ->name('add.event');
+    Route::get('/assessment', [EventController::class, 'assessment']) ->name('event.assessment');
+    Route::get('/{slug}', [EventController::class, 'show']) ->name('event.show');
 });
 
 Route::middleware([
@@ -27,7 +35,5 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 

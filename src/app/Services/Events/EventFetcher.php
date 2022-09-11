@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Events;
 
-use App\Http\Requests\EventListRequest;
+use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -12,7 +12,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 final class EventFetcher
 {
-    public function getList(EventListRequest $request): LengthAwarePaginator
+    public function getList(EventRequest $request): LengthAwarePaginator
     {
         return QueryBuilder::for(Event::class, $request)
             ->allowedFilters([

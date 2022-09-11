@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             TopicSeeder::class,
             OfficeSeeder::class,
             EventStatusesSeeder::class,
+            RoleSeeder::class
         ]);
     }
 }
